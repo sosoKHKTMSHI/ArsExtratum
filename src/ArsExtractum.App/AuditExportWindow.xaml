@@ -1,0 +1,42 @@
+<Window x:Class="ArsExtractum.App.AuditExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Selecionar outputs para auditoria"
+        Width="520" Height="470"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#F3F5F6">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock FontSize="18" FontWeight="SemiBold" Text="Outputs para incluir no ZIP" />
+            <TextBlock Margin="0,6,0,14" Foreground="#56616A" TextWrapping="Wrap"
+                       Text="Escolha as etapas necessárias. Para rastrear perdas ou alterações entre etapas, use Selecionar tudo." />
+            <StackPanel Orientation="Horizontal">
+                <Button Click="SelectAll_Click" Content="Selecionar tudo" />
+                <Button Click="SelectCompact_Click" Content="Somente outputs atuais" />
+                <Button Click="ClearAll_Click" Content="Limpar seleção" />
+            </StackPanel>
+        </StackPanel>
+        <Border Grid.Row="1" Margin="0,14" Padding="14" Background="White" BorderBrush="#D6DCE0" BorderThickness="1" CornerRadius="4">
+            <StackPanel>
+                <CheckBox x:Name="CaptureOption" Margin="0,5" Content="Capture PdfPig — manifesto, palavras, glifos e texto legível" />
+                <CheckBox x:Name="ReconstructionOption" Margin="0,5" Content="Reconstrução bruta — JSON e TXT por documento" />
+                <CheckBox x:Name="SanitizationOption" Margin="0,5" Content="Higienização documental — JSON e TXT por documento" />
+                <CheckBox x:Name="AssemblyOption" Margin="0,5" IsChecked="True" Content="Montagem de pacientes e episódios — JSON e TXT" />
+                <CheckBox x:Name="SemanticOption" Margin="0,5" IsChecked="True" Content="Batch semântico enriquecido — JSON e TXT" />
+                <CheckBox x:Name="ProjectionOption" Margin="0,5" IsChecked="True" Content="Projeção clínica final — JSON e TXT" />
+                <TextBlock Margin="0,14,0,0" Foreground="#66717A" TextWrapping="Wrap"
+                           Text="Capture pode gerar um arquivo grande. As unidades da projeção seguem a opção atual da tela." />
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Click="Cancel_Click" Content="Cancelar" />
+            <Button Margin="8,0,0,0" Click="Export_Click" Background="{StaticResource AccentBrush}" Foreground="White" FontWeight="SemiBold" Content="Continuar" />
+        </StackPanel>
+    </Grid>
+</Window>

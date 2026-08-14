@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0-windows7.0": {
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Direct",
+        "requested": "[10.0.10, )",
+        "resolved": "10.0.10",
+        "contentHash": "f5VCIE7AJpd5YvzNTeMGVzQIgyE9tX+AreTYwQF+REbu+DZo/2Ae+jNSwhPEYrVz6RRkd7y8ubXjk6Nn6Ka+Cg=="
+      },
+      "arsextractum.core": {
+        "type": "Project"
+      },
+      "arsextractum.pdfpig": {
+        "type": "Project",
+        "dependencies": {
+          "ArsExtractum.Core": "[0.5.0-pilot, )",
+          "PdfPig": "[0.1.16-alpha-20260717-5ee5c, )"
+        }
+      },
+      "PdfPig": {
+        "type": "CentralTransitive",
+        "requested": "[0.1.16-alpha-20260717-5ee5c, )",
+        "resolved": "0.1.16-alpha-20260717-5ee5c",
+        "contentHash": "kADItsvK5CpZ6i5aYyg8aE1njsIVpN9/ybu8sQm3TFMfg3CD41RoT+mXuJg9rWvMXu3dl1z/i+JVnpmfeALWLg=="
+      }
+    },
+    "net10.0-windows7.0/win-x64": {}
+  }
+}

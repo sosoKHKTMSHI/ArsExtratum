@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>ArsExtractum.Tests</RootNamespace>
+    <AssemblyName>ArsExtractum.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <ProjectReference Include="../../src/ArsExtractum.Core/ArsExtractum.Core.csproj" />
+    <ProjectReference Include="../../src/ArsExtractum.PdfPig/ArsExtractum.PdfPig.csproj" />
+    <ProjectReference Include="../../src/ArsExtractum.App/ArsExtractum.App.csproj" />
+    <!-- Tests for the superseded document-level v0 remain archival only. -->
+    <Compile Remove="LaboratoryEntityExtractorTests.cs;SemanticCorpusValidationTests.cs" />
+  </ItemGroup>
+</Project>

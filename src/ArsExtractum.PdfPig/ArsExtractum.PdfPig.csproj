@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>ArsExtractum.PdfPig</RootNamespace>
+    <AssemblyName>ArsExtractum.PdfPig</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PdfPig" />
+    <ProjectReference Include="../ArsExtractum.Core/ArsExtractum.Core.csproj" />
+  </ItemGroup>
+</Project>

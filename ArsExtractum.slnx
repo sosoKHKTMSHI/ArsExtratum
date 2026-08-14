@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ArsExtractum.Core/ArsExtractum.Core.csproj" />
+    <Project Path="src/ArsExtractum.PdfPig/ArsExtractum.PdfPig.csproj" />
+    <Project Path="src/ArsExtractum.App/ArsExtractum.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ArsExtractum.Tests/ArsExtractum.Tests.csproj" />
+  </Folder>
+</Solution>
