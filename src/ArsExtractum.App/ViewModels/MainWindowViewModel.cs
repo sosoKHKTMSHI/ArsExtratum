@@ -269,7 +269,6 @@ public sealed class MainWindowViewModel : ObservableObject
                 }
                 catch (Exception exception)
                 {
-                    // A falha de um arquivo não interrompe o restante do lote.
                     var safeMessage = exception.GetBaseException().Message;
                     runs.Add(new DocumentRunRecord(item.DisplayName, null, safeMessage));
                     item.Status = $"Falha: {safeMessage}";

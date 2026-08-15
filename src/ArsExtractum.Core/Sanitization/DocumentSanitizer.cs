@@ -162,14 +162,12 @@ public static partial class DocumentSanitizer
                 continue;
             }
 
-            // Material remains clinical content even when printed inside a reference band.
             if (StartsWithLabel(normalized, "Material"))
             {
                 output.Add(SanitizeMaterialLine(line, referenceColumnLeft));
                 continue;
             }
 
-            // A left-side heading is a reference block, not a persistent right column.
             if (LooksLikeFieldLabel(normalized) &&
                 referenceColumnLeft is not null &&
                 referenceColumnLeft.Value < page.Width / 2d)

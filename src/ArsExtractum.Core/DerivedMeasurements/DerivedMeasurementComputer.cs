@@ -95,8 +95,6 @@ public sealed class DerivedMeasurementComputer
         SemanticEpisode episode,
         LaboratoryOccurrence occurrence)
     {
-        // Laboratory-reported eGFR is deliberately removed from candidate selection;
-        // its numeric value is never read, compared, copied, or used as fallback.
         var candidates = occurrence.Observations.Where(static observation =>
             !string.Equals(observation.Label, LaboratoryReportedEgfrLabel, StringComparison.Ordinal)).ToArray();
         var candidate = candidates.Length == 1 ? candidates[0] : null;
@@ -272,8 +270,6 @@ public sealed class DerivedMeasurementComputer
         var sexFactor = female ? 1.012d : 1d;
         var ratio = serumCreatinine / kappa;
 
-        // Constants and operation order implement the published 2021 CKD-EPI
-        // creatinine equation without race and without intermediate rounding.
         return 142d *
                Math.Pow(Math.Min(ratio, 1d), alpha) *
                Math.Pow(Math.Max(ratio, 1d), -1.200d) *

@@ -123,7 +123,6 @@ public static class RawDocumentReconstructor
             }
 
             var trailingContent = SplitTrailingFieldContent(label, labelWord);
-            // Alguns formulários desenham o valor ligeiramente acima do rótulo.
             (candidates[index - 1], candidates[index]) =
                 (candidates[index], candidates[index - 1]);
             if (trailingContent is not null)
@@ -162,7 +161,6 @@ public static class RawDocumentReconstructor
                 continue;
             }
 
-            // Caixas alinhadas podem dividir um rótulo em torno da coluna de resultado.
             (candidates[index + 1], candidates[index + 2]) =
                 (candidates[index + 2], candidates[index + 1]);
             index += 2;
@@ -279,7 +277,6 @@ public static class RawDocumentReconstructor
 
         foreach (var fragment in fragments)
         {
-            // O PdfPig pode separar índices tipográficos da palavra-base.
             var target = FindTypographicBase(fragment.Word, fragment.Candidate, candidates);
             if (target is null)
             {
@@ -318,7 +315,6 @@ public static class RawDocumentReconstructor
                 BaseWord = baseWord,
                 Gap = fragment.Bounds.Left - baseWord.Bounds.Right,
                 Overlap = VerticalOverlap(fragment.Bounds, candidate.Bounds),
-                // A altura da linha é mais estável que a caixa de letras como "mm".
                 LineHeight = candidate.VisualHeight,
                 BaselineDistance = Math.Abs(fragment.BaselineY - baseWord.BaselineY),
             }))

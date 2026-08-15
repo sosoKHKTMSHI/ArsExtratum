@@ -376,8 +376,6 @@ public sealed class OutputProjector
                 var matching = observations.Where(observation =>
                 {
                     var normalized = NormalizedLabel(observation.Label);
-                    // "MIELOCITOS" is a suffix of "METAMIELOCITOS"; exact matching
-                    // prevents the two documented cell groups from being merged.
                     return definition.Label is "Mielo" or "Blastos"
                         ? normalized == definition.Match[0]
                         : definition.Match.Any(label => normalized.Contains(label, StringComparison.Ordinal));
@@ -529,8 +527,6 @@ public sealed class OutputProjector
         LaboratorySusceptibilityEntry entry,
         string interpretation)
     {
-        // RawResult is authoritative: a documented MIC/CIM expression keeps its
-        // comparator, value and unit even when ordinary units are hidden.
         var normalized = ReferenceLaboratoryCatalog.Normalize(entry.RawResult);
         var hasMic = normalized.Contains("MIC", StringComparison.Ordinal) ||
                      normalized.Contains("CIM", StringComparison.Ordinal);

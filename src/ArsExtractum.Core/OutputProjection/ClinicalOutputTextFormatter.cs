@@ -50,8 +50,6 @@ public static class ClinicalOutputTextFormatter
         }
         else if (ownLines.Length == 0)
         {
-            // A cultura continua sinalizada no episódio, sem projetar um resultado
-            // que a política exige que o operador confira no documento-fonte.
             builder.Append(hasHiddenCultures
                 ? " Culturais"
                 : " Sem resultados laboratoriais projetáveis.");

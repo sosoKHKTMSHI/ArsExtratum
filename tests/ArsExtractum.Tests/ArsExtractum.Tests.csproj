@@ -15,7 +15,6 @@
     <ProjectReference Include="../../src/ArsExtractum.Core/ArsExtractum.Core.csproj" />
     <ProjectReference Include="../../src/ArsExtractum.PdfPig/ArsExtractum.PdfPig.csproj" />
     <ProjectReference Include="../../src/ArsExtractum.App/ArsExtractum.App.csproj" />
-    <!-- Tests for the superseded document-level v0 remain archival only. -->
     <Compile Remove="LaboratoryEntityExtractorTests.cs;SemanticCorpusValidationTests.cs" />
   </ItemGroup>
 </Project>

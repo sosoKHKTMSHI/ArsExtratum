@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="LaboratorySemantic/Catalog/*.json" />
-    <!-- v0 remains on disk only as historical reference; it is not productive code. -->
     <Compile Remove="Semantic/**/*.cs" />
   </ItemGroup>
 </Project>

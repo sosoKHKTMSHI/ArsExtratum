@@ -336,8 +336,6 @@ public static class PatientEpisodeAssembler
         IReadOnlyList<AssembledPage> pages,
         IReadOnlyList<CanonicalEpisodeContentBlock> blocks)
     {
-        // Coverage is derived from both sides of the mapping so a future change cannot
-        // silently omit a source page or assign the same source to multiple blocks.
         var activePages = pages.Where(static page => page.ActiveLines.Count > 0).ToArray();
         var ownerCounts = blocks
             .SelectMany(static block => block.Sources)
@@ -395,8 +393,6 @@ public static class PatientEpisodeAssembler
         {
             var texts = page.ActiveLines.Select(static line => line.Text).ToArray();
             var fingerprint = StableKey("content", texts);
-            // A hash narrows candidates, but exact ordinal text equality is the authority.
-            // Divergent or partially matching content therefore remains in separate blocks.
             var equivalentIndex = blocks.FindIndex(block =>
                 block.ContentFingerprint == fingerprint &&
                 block.ActiveLines.Select(static line => line.Text).SequenceEqual(texts, StringComparer.Ordinal));
@@ -437,8 +433,6 @@ public static class PatientEpisodeAssembler
 
     private static EpisodeAgeAtRequest CalculateAgeAtRequest(string birthDate, string requestDate)
     {
-        // Documentary reported age is intentionally ignored: episode age is reproducibly
-        // derived only from the patient's birth date and the episode request date.
         if (!DateOnly.TryParseExact(birthDate.Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out var birth))
         {

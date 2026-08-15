@@ -79,8 +79,6 @@ public sealed partial class LaboratorySemanticExtractor
             {
                 if (candidates.Count > 0 && CanContinue(candidates[^1], block))
                 {
-                    // The frozen bundle contains one hemogram specimen line on the
-                    // immediately following page. Context and physical continuity are mandatory.
                     candidates[^1].Add(block, 0, block.ActiveLines.Count);
                 }
                 else
@@ -116,8 +114,6 @@ public sealed partial class LaboratorySemanticExtractor
         var occurrences = candidates.Select(candidate => BuildOccurrence(patientKey, episode, candidate)).ToArray();
         occurrences = BuildSafeMicrobiologyRelationships(occurrences);
 
-        // Ownership is calculated independently of extraction fields. This makes a
-        // dropped or multiply segmented line visible even when the text output looks plausible.
         var owners = new Dictionary<(string BlockId, string LineId), int>();
         foreach (var candidate in candidates)
         {
@@ -249,8 +245,6 @@ public sealed partial class LaboratorySemanticExtractor
             var separator = text.IndexOf(':', StringComparison.Ordinal);
             var rawAfterLabel = separator >= 0 ? text[(separator + 1)..].Trim() : string.Empty;
             var normalizedLabel = ReferenceLaboratoryCatalog.Normalize(label);
-            // In the reference laboratory's TTPA layout, AMOSTRA is the measured
-            // clotting time. This exception is deliberately concept-scoped.
             var isTtpaResult = candidate.Concept.ConceptId ==
                 "fsph-nh.tempo-de-tromboplastina-parcial-ativada-ttpa" &&
                 normalizedLabel == "AMOSTRA";
@@ -267,8 +261,6 @@ public sealed partial class LaboratorySemanticExtractor
                     item with { FieldPath = $"attributes[{attributes.Count}]" }));
             }
 
-            // Numeric parsing is restricted to the documentary result segment. Digits
-            // in assay names (ANTI-HIV 1 E 2) and organism markers (Germe 1) are labels.
             var resultSegment = ResultSegment(text, separator);
             var matches = isSpecimen
                 ? Array.Empty<Match>()
