@@ -1,0 +1,39 @@
+<Window x:Class="ArsExtractum.UserApp.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sobre o Ars Extractum" Width="610" Height="520"
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False" Background="{StaticResource CanvasBrush}">
+    <Border Margin="22" Padding="28" Style="{StaticResource PanelBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock FontFamily="Georgia" FontSize="25" FontWeight="Bold" Text="ARS EXTRACTUM" />
+                <TextBlock Margin="0,4,0,0" Foreground="{StaticResource MutedInkBrush}"
+                           Text="Extrator laboratorial · versão 0.5.0-pilot" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,22,0,16">
+                <TextBlock TextWrapping="Wrap" LineHeight="22"
+                           Text="O Ars Extractum organiza resultados laboratoriais a partir de PDFs compatíveis. Não interpreta normalidade, diagnóstico, prognóstico ou conduta." />
+                <TextBlock Margin="0,13,0,0" TextWrapping="Wrap" LineHeight="22"
+                           Text="O processamento é local e offline, sem telemetria, servidor ou banco de dados." />
+                <TextBlock Margin="0,13,0,0" TextWrapping="Wrap" LineHeight="22"
+                           Text="A TFG exibida é calculada pelo aplicativo pela equação CKD-EPI 2021 creatinina, race-free, quando os requisitos documentais são atendidos." />
+                <TextBlock Margin="0,13,0,0" TextWrapping="Wrap" LineHeight="22"
+                           Text="Resultados culturais possuem apresentação variável e devem ser conferidos pelo operador na documentação de origem." />
+                <TextBlock Margin="0,18,0,0" TextWrapping="Wrap">
+                    <Run Text="Correções e contato: " /><Run FontWeight="SemiBold" Text="felipe.somavila@hotmail.com" />
+                </TextBlock>
+                <TextBlock Margin="0,18,0,0" FontStyle="Italic" Foreground="{StaticResource MutedInkBrush}"
+                           Text="Projeto Ars Extractum" />
+            </StackPanel>
+            <Button Grid.Row="2" Width="105" HorizontalAlignment="Right"
+                    Style="{StaticResource PrimaryButton}" IsDefault="True"
+                    Click="Close_Click" Content="Fechar" />
+        </Grid>
+    </Border>
+</Window>

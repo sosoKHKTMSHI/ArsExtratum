@@ -1,6 +1,7 @@
 * text=auto eol=lf
 
 *.docx binary
+*.exe binary
 *.ico binary
 *.png binary
 *.zip binary

@@ -34,6 +34,9 @@
                             Content="Processar" />
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Margin="0,0,8,0" Click="LaboratoryCurves_Click"
+                            IsEnabled="{Binding CanOpenLaboratoryCurves}"
+                            Content="Curvas laboratoriais" />
                     <CheckBox Margin="0,0,14,0"
                               VerticalAlignment="Center"
                               IsChecked="{Binding ShowUnits}"

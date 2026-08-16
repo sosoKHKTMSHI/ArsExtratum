@@ -6,9 +6,7 @@ using System.Windows.Input;
 using ArsExtractum.App.Services;
 using ArsExtractum.App.ViewModels;
 using ArsExtractum.Core.Pipeline;
-using ArsExtractum.Core.Reconstruction;
-using ArsExtractum.Core.Sanitization;
-using ArsExtractum.PdfPig;
+using ArsExtractum.Runtime;
 using Microsoft.Win32;
 
 namespace ArsExtractum.App;
@@ -20,12 +18,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        var pipeline = new ProcessingPipeline(
-        [
-            new PdfPigCaptureStage(),
-            new RawReconstructionStage(),
-            new SanitizationStage(),
-        ]);
+        var pipeline = ProductionRuntime.CreateDocumentPipeline();
         _viewModel = new MainWindowViewModel(pipeline);
         DataContext = _viewModel;
     }
@@ -66,6 +59,23 @@ public partial class MainWindow : Window
     {
         if (!_viewModel.HasSelectedPatientCultures) return;
         new CultureReviewWindow(_viewModel.CultureWarningText, _viewModel.CultureReviewText)
+        {
+            Owner = this,
+        }.ShowDialog();
+    }
+
+    private void LaboratoryCurves_Click(object sender, RoutedEventArgs e)
+    {
+        var patient = _viewModel.SelectedSemanticPatientForCurves;
+        if (!_viewModel.CanOpenLaboratoryCurves || patient is null)
+        {
+            return;
+        }
+
+        new LaboratoryCurvesWindow(
+            _viewModel.SemanticPatientBatch!,
+            patient.PatientKey,
+            patient.Identity.PatientName)
         {
             Owner = this,
         }.ShowDialog();

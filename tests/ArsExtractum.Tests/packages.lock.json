@@ -87,11 +87,19 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
-      "ArsExtractum": {
+      "Ars Extractum": {
         "type": "Project",
         "dependencies": {
           "ArsExtractum.Core": "[0.5.0-pilot, )",
-          "ArsExtractum.PdfPig": "[0.5.0-pilot, )"
+          "ArsExtractum.Runtime": "[0.5.0-pilot, )"
+        }
+      },
+      "Ars Extractum Inspector": {
+        "type": "Project",
+        "dependencies": {
+          "ArsExtractum.Core": "[0.5.0-pilot, )",
+          "ArsExtractum.PdfPig": "[0.5.0-pilot, )",
+          "ArsExtractum.Runtime": "[0.5.0-pilot, )"
         }
       },
       "arsextractum.core": {
@@ -102,6 +110,13 @@
         "dependencies": {
           "ArsExtractum.Core": "[0.5.0-pilot, )",
           "PdfPig": "[0.1.16-alpha-20260717-5ee5c, )"
+        }
+      },
+      "arsextractum.runtime": {
+        "type": "Project",
+        "dependencies": {
+          "ArsExtractum.Core": "[0.5.0-pilot, )",
+          "ArsExtractum.PdfPig": "[0.5.0-pilot, )"
         }
       },
       "PdfPig": {

@@ -56,6 +56,11 @@ public sealed class MainWindowViewModel : ObservableObject
 
     public ClinicalOutputBatch? ClinicalOutputBatch { get; private set; }
 
+    public SemanticPatient? SelectedSemanticPatientForCurves => SelectedSemanticPatient();
+
+    public bool CanOpenLaboratoryCurves => SelectedPatient is not null &&
+        SemanticPatientBatch?.DerivedMeasurementCoverage?.IsComplete == true;
+
     public bool ShowUnits
     {
         get => _showUnits;
@@ -110,6 +115,8 @@ public sealed class MainWindowViewModel : ObservableObject
                 OnPropertyChanged(nameof(HasSelectedPatientCultures));
                 OnPropertyChanged(nameof(CultureWarningText));
                 OnPropertyChanged(nameof(CultureReviewText));
+                OnPropertyChanged(nameof(SelectedSemanticPatientForCurves));
+                OnPropertyChanged(nameof(CanOpenLaboratoryCurves));
                 RefreshOutput();
             }
         }
@@ -389,6 +396,8 @@ public sealed class MainWindowViewModel : ObservableObject
         var watch = System.Diagnostics.Stopwatch.StartNew();
         SemanticPatientBatch = DerivedMeasurementComputer.Enrich(
             new DerivedMeasurementComputationInput(SemanticPatientBatch));
+        OnPropertyChanged(nameof(SelectedSemanticPatientForCurves));
+        OnPropertyChanged(nameof(CanOpenLaboratoryCurves));
         watch.Stop();
         _derivedDuration = watch.Elapsed;
     }

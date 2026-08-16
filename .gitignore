@@ -15,6 +15,7 @@ tmp/
 *.zip
 *.pdf
 
-# The verified framework-dependent application is the only tracked distribution artifact.
+# The verified framework-dependent applications are the only tracked distribution artifacts.
 dist/*
-!dist/ArsExtractum.exe
+!dist/Ars Extractum Inspector.exe
+!dist/Ars Extractum.exe

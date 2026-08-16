@@ -1,0 +1,95 @@
+<Window x:Class="ArsExtractum.UserApp.LaboratoryCurvesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Curvas laboratoriais" Width="1100" Height="720" MinWidth="850" MinHeight="560"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Background="{StaticResource CanvasBrush}">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock FontFamily="Georgia" FontSize="21" FontWeight="Bold" Text="CURVAS LABORATORIAIS" />
+            <TextBlock Margin="0,4,0,0" Foreground="{StaticResource MutedInkBrush}"
+                       Text="{Binding PatientDisplayName, StringFormat=Paciente: {0}}" />
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,14,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Style="{StaticResource PanelBorder}" Padding="13">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+                    <TextBlock FontWeight="SemiBold" Text="Resultados disponíveis" />
+                    <ScrollViewer Grid.Row="1" Margin="0,9,0,0" MaxHeight="230" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Options}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Margin="3" IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <StackPanel Grid.Column="2">
+                <Border Style="{StaticResource PanelBorder}" Padding="13">
+                    <StackPanel>
+                        <TextBlock Margin="0,0,0,10" FontWeight="SemiBold" Text="Período" />
+                        <RadioButton x:Name="AllFilterRadio" GroupName="PeriodFilter"
+                                     IsChecked="{Binding IsAllFilter}" Content="Todos" />
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <RadioButton x:Name="CustomRangeFilterRadio" GroupName="PeriodFilter" Width="170"
+                                         VerticalAlignment="Center" IsChecked="{Binding IsCustomRangeFilter}"
+                                         Content="Intervalo personalizado:" />
+                            <DatePicker x:Name="StartDatePicker" Width="125" IsEnabled="{Binding UsesCustomRange}"
+                                        SelectedDate="{Binding StartDate}" />
+                            <TextBlock Margin="9,0" VerticalAlignment="Center" Text="—" />
+                            <DatePicker x:Name="EndDatePicker" Width="125" IsEnabled="{Binding UsesCustomRange}"
+                                        SelectedDate="{Binding EndDate}" />
+                        </StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <RadioButton x:Name="LastDaysFilterRadio" GroupName="PeriodFilter" Width="100"
+                                         VerticalAlignment="Center" IsChecked="{Binding IsLastDaysFilter}"
+                                         Content="Nos últimos" />
+                            <TextBox x:Name="LastDaysTextBox" Width="55" IsEnabled="{Binding UsesLastDays}"
+                                     Text="{Binding LastDaysText, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="dias" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Margin="0,10,0,0" Style="{StaticResource PanelBorder}" Padding="13">
+                    <StackPanel>
+                        <TextBlock Margin="0,0,0,9" FontWeight="SemiBold" Text="Apresentação" />
+                        <CheckBox x:Name="DeltaCheckBox" IsChecked="{Binding IncludeDelta}"
+                                  Content="Exibir variação (delta) entre resultados" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+            <TextBlock Margin="2,0,0,6" Foreground="#9C1C1C" Text="{Binding ValidationMessage}" />
+            <TextBox x:Name="CurvesOutputBox" Grid.Row="1" Padding="12"
+                     Text="{Binding OutputText, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True"
+                     FontFamily="Consolas" FontSize="13" TextWrapping="NoWrap"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+        </Grid>
+
+        <StackPanel Grid.Row="3" Margin="0,12,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="0,0,8,0" Style="{StaticResource PrimaryButton}"
+                    Click="Generate_Click" Content="Gerar curvas" />
+            <Button Margin="0,0,8,0" Style="{StaticResource SecondaryButton}"
+                    Click="Copy_Click" Content="Copiar texto" />
+            <Button Style="{StaticResource SecondaryButton}" IsDefault="True"
+                    Click="Close_Click" Content="Fechar" />
+        </StackPanel>
+    </Grid>
+</Window>

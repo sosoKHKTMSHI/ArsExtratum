@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>ArsExtractum.UserApp</RootNamespace>
+    <AssemblyName>Ars Extractum</AssemblyName>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../ArsExtractum.Core/ArsExtractum.Core.csproj" />
+    <ProjectReference Include="../ArsExtractum.Runtime/ArsExtractum.Runtime.csproj" />
+  </ItemGroup>
+</Project>
